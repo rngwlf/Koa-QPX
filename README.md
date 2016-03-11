@@ -3,7 +3,7 @@ Google QPX API consumer written in Koa. It queries the API with flight parameter
 
 # Requirements
 
-A modern NodeJS installation is required for the Koajs Library.
+A modern NodeJS installation is required for the Koa Library.
 
 # Installation
 
