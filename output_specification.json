@@ -1,0 +1,31 @@
+{
+	"results": [
+		{
+			"total_price" : "string"
+			, "departure_time" : "string"
+			, "return_arrival_time" : "string"
+			, "trips" : [
+				{
+					"total_duration" : "int"
+					, "departure_time" : "string"
+					, "arrival_time" : "string"
+					, "total_connection_time" : "int"
+					, "flights" : [
+						{
+							"duration" : "int"
+							,"carrier" : "string"
+							,"number" : "string"
+							,"departure_time" : "string"
+							,"arrival_time" : "string"
+							, "origin_airport" : "string"
+							, "destination_airport" : "string"
+						}
+					]
+				}
+			]
+		}
+
+	]
+
+	
+}

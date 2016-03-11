@@ -1,0 +1,24 @@
+{
+  "name": "qpxapi",
+  "version": "1.0.0",
+  "description": "simple REST consumer of google QPX API",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "co-request": "^1.0.0",
+    "country-data": "0.0.24",
+    "gulp": "^3.9.1",
+    "gulp-cli": "^1.2.1",
+    "jsonpath-plus": "^0.14.0",
+    "koa": "^1.2.0",
+    "koa-route": "^2.4.2",
+    "koa-static": "^2.0.0",
+    "moment": "^2.12.0",
+    "thunkify": "^2.1.2",
+    "thunkify-wrap": "^1.0.4"
+  }
+}
