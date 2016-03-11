@@ -31,28 +31,23 @@ function *flights(){
 	if(validParameters(this.query)){
 		var service = getService();
 		var searchParameters = jsonBuilder[service.type].getServiceRequest(this.query, service);
-		console.log(searchParameters);
-		this.body = searchParameters;
-		/*
 		var serviceResponse = yield request({
 						uri: service.url
+						,method: "POST"
 						, body : searchParameters
 						, json: true});
-		console.log(serviceResponse);
-		this.body=serviceResponse;
-		var results = JSON.parse(serviceResponse.body);
-		console.log(results);
+
+		var results = serviceResponse.body;
 		if(results.error == undefined){
 			this.body = jsonBuilder[service.type].getResponse(results, service);
 		}
 		else{
-			this.body = results;
+			this.body = serviceResponse.body;
 		}
-		*/
-		
+
 	}
 	else{
-		this.body = {error: "input invalid"};
+		this.body = {error: "invalid input"};
 	}
 	
 }

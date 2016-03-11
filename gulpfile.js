@@ -25,7 +25,7 @@ gulp.task('server', function() {
 gulp.task('default', function() {
   gulp.run('server')
 
-  gulp.watch(['./app.js', './service_config.json','./sampledata/*'], function() {
+  gulp.watch(['./app.js', './json-builder.js', './service_config.json','./sampledata/*'], function() {
     gulp.run('server')
   })
   

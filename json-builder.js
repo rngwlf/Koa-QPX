@@ -4,11 +4,9 @@ var moment = require('moment');
 var public = {};
 
 function getParameter(path, object){
-	//console.log(path);
 	return JSONPath({wrap: false}, path, object);
 }
 function getParameters(path, object){
-	//console.log(path);
 	return JSONPath({wrap: true}, path, object);
 }
 
@@ -96,14 +94,9 @@ public.getServiceRequest = function (request, service)
 				}
 				else if(mapPath.indexOf("-DATE:") > -1){
 					var mapPaths = mapPath.split("-DATE:");
-					console.log(mapPath);
-					console.log(mapPaths[0]);
-					console.log(mapPaths[1]);
-					console.log(getParameter(mapPaths[0], request));
 					propertyValue = moment(getParameter(mapPaths[0], request),"YYYY-MM-DD HH:mm:ss").format(mapPaths[1]);
-					console.log(propertyValue);
 				}
-				else{
+				else {
 					propertyValue = getParameter(mapPath, request)
 				}
 
@@ -115,8 +108,16 @@ public.getServiceRequest = function (request, service)
 				inputObj[property] = service.api_key;
 			}
 			else if(typeof inputObj[property] == "object"){
-				var subObject = inputObj[property];
-				if(subObject._OPTIONALOBJECT != undefined && getParameter(subObject._OPTIONALOBJECT,request) != undefined){
+				if(inputObj[property]._OPTIONALARRAYOBJECT != undefined && getParameter(inputObj[property]._OPTIONALARRAYOBJECT,request) == undefined){
+					var index = inputObj.indexOf(inputObj[property]);
+					if (index > -1) {
+					    inputObj.splice(index, 1);
+					}
+				}
+				else{
+					if(inputObj[property]._OPTIONALARRAYOBJECT != undefined){
+						delete inputObj[property]._OPTIONALARRAYOBJECT;
+					}
 					buildObject(inputObj[property]);
 				}
 			}

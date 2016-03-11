@@ -1,0 +1,59 @@
+{
+	"services":[
+		{
+			"type":"JSONPath-Template"
+			, "url" : "https://www.googleapis.com/qpxExpress/v1/trips/search?key=XYZ1234"
+			, "response_jsonmapping":{
+				"base" : "$.trips.tripOption[*]"
+				, "total_price": "saleTotal"
+				, "departure_time" : "slice[0].segment[0].leg[0].departureTime"
+				, "return_arrival_time" : "slice[1].segment[(@.length - 1)].leg[0].arrivalTime"
+				, "trips" : {
+					"base" : "slice[*]"
+					, "total_duration" : "duration"
+					, "departure_time" : "segment[0].leg[0].departureTime"
+					, "arrival_time" : "segment[(@.length - 1)].leg[(@.length - 1)].arrivalTime"
+					, "flights" : {
+						"base" : "segment[*]"
+						, "duration" : "duration"
+						, "carrier" : "flight.carrier"
+						, "flight_number" : "flight.number"
+						, "connection_time" : "connectionDuration"
+						, "departure_time" : "leg[0].departureTime"
+						, "arrival_time" : "leg[0].arrivalTime"
+						, "origin_airport" : "leg[0].origin"
+						, "destination_airport" : "leg[0].destination"
+					}
+				}
+			}
+			, "request_jsonmapping" : {
+				"request" : {
+					"slice" : [
+						{
+							"origin" : "$.origin"
+							, "destination" : "$.destination"
+							, "date" : "$.start_date-DATE:YYYY-MM-DD"
+							, "maxStops" : "$.max_stops-INT"
+						}
+						,{
+							"_OPTIONALARRAYOBJECT" : "$.return_date"
+							, "date" : "$.return_date-DATE:YYYY-MM-DD"
+							, "origin" : "$.destination"
+							, "destination" : "$.origin"
+							, "maxStops" : "$.max_stops-INT"
+						}
+					]
+					, "passengers" : {
+						"adultCount": "$.adult_passengers-INT"
+					    , "infantInLapCount": 0
+					    , "infantInSeatCount": 0
+					    , "childCount": 0
+					    , "seniorCount": 0
+					}
+					, "solutions" : 20
+					, "maxPrice" : "$.max_price_currency+$.max_price"
+				}
+			}
+		}
+	]
+}
