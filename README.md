@@ -9,19 +9,22 @@ A modern NodeJS installation is required for the Koa Library.
 
 npm install
 
-# Running
-
-gulp server
-or
-gulp
-
-# Usage
-This library takes in GET query parameters, queries the API and returns a JSON object.
-
-## Configuration
+# Configuration
 
 the file service_config.json must be modified to use include a valid Google API Server Key. Replace XYZ1234 with your key for url string:
 "https://www.googleapis.com/qpxExpress/v1/trips/search?key=XYZ1234"
+
+# Running
+
+gulp server
+
+or
+
+gulp
+
+# Usage
+
+This library takes in GET query parameters, queries the API and returns a JSON object. This application uses JSONPath as a templating engine to define the request and response readers to consume a service.
 
 ## Input
 * start_date
@@ -66,3 +69,13 @@ Dates are strictly enforced using format YYYY-MM-DD HH:MM:SS. Formatting and dat
 	]
 }
 ```
+
+## Configuration of New Services
+
+New services can be supported by adding to the file service_config.json
+
+The service config file can be extended to include other services that are somewhat similarly organized like the Google QPX Express API. It's assumed the segments and flights are appropriately nested. Custom tags are used to help format data appropriately, for instance -DATE: allows to format input dates (strictly enforced YYYY-MM-DD HH:MM:SS), and reformats it to be compatible with Google QPX format (YYYY-MM-DD). The response uses JSONPath to map the response, while the request is a JSON object that mimics the request format that maps to the API input format.
+
+A new object in the array, under services, will allow the application to randomly distribute the api query load between defined services.
+
+For radically different API formats, a different JSON reader can be build similar to json-builder.js
