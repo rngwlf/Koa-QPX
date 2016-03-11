@@ -16,12 +16,15 @@ the file service_config.json must be modified to use include a valid Google API 
 
 # Running
 
+node app.js
+
 gulp server
 
 or
 
 gulp
 
+*Gulp will require global install
 # Usage
 
 This library takes in GET query parameters, queries the API and returns a JSON object. This application uses JSONPath as a templating engine to define the request and response readers to consume a service.
