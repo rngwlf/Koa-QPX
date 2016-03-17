@@ -29,6 +29,8 @@ gulp
 
 This library takes in GET query parameters, queries the API and returns a JSON object. This application uses JSONPath as a templating engine to define the request and response readers to consume a service.
 
+The server runs on port 3000
+
 ## Input
 * start_date
 * return_date
